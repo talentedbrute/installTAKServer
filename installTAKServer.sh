@@ -44,7 +44,7 @@ then
   usage
 fi
 
-if [ -Z "${EMAIL}" ] || [ -z "${PASSWORD}" ];
+if [ -z "${EMAIL}" ] || [ -z "${PASSWORD}" ];
 then
   echo "EMAIL and/or PASSWORD are not set"
   exit 1;
