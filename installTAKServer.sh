@@ -5,13 +5,7 @@
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-RPM=
-DBHOST=
-DBPASSWORD=
-FQDN=
-SWAP=0
-EMAIL=
-PASSWORD=
+. ${SCRIPT_DIR}/setup.sh
 
 usage() { echo "usage: sudo installTAKServer.sh -r <RPM to INSTALL> -d <DB HOST> -p <DB PASSWORD> -f <FQDN> -s"; exit 1; }
 

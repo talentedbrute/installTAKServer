@@ -1,19 +1,10 @@
 #!/bin/bash
 
-### These need to be set before executing
-export STATE=
-export CITY=
-export ORGANIZATION=
-export ORGANIZATIONAL_UNIT="TAK"
-export CERT_INTER_CA=
-export CA_NAME=
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-DBHOST=
-DBPASSWORD=
-FQDN=
-EMAIL=
+. ${SCRIPT_DIR}/setup.sh
 
-usage() { echo "usage: sudo setupTAKServer.sh -d <DB HOST> -p <DB PASSWORD> -f <FQDN> -e <EMAIL Address>"; exit 1; }
+usage() { echo "usage: setupTAKServer.sh -d <DB HOST> -p <DB PASSWORD> -f <FQDN> -e <EMAIL Address>"; exit 1; }
 
 while getopts "d:p:f:e:h" arg; do
   case $arg in
