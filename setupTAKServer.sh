@@ -27,7 +27,7 @@ while getopts "d:p:f:e:h" arg; do
 done
 shift $((OPTIND-1))
 
-if [ -z "${DBHOST}" ] || [ -z "${DBPASSWORD}" ] || [ -z "${FQDN}" ] || [ -z "${EMAIL}" ];
+if [ -z "${FQDN}" ] || [ -z "${EMAIL}" ];
 then
     usage
 fi
@@ -38,9 +38,19 @@ then
     exit 1
 fi
 
-echo "export SDKMAN_DIR=/usr/local/sdkman" >> ~/.bash_profile
-echo "source /usr/local/sdkman/bin/sdkman-init.sh" >> ~/.bash_profile
-echo "sdk use java 17.0.9-amzn" >> ~/.bash_profile
+sdkmanSetup=`grep -c SDKMAN ~/.bash_profile`
+
+if [ ${sdkmanSetup} == 0 ];
+then
+  echo "export SDKMAN_DIR=/usr/local/sdkman" >> ~/.bash_profile
+  echo "source ${SDKMAN_DIR}/bin/sdkman-init.sh" >> ~/.bash_profile
+  echo "sdk use java 17.0.9-amzn" >> ~/.bash_profile
+
+  export SDKMAN_DIR=/usr/local/sdkman
+  source ${SDKMAN_DIR}/bin/sdkman-init.sh
+  sdk use java 17.0.9-amzn
+fi
+
 
 ## Setup Certs
 ##---------------------------------
