@@ -62,9 +62,13 @@ cd /opt/tak
 
 cp CoreConfig.example.xml CoreConfig.xml
 
-## Setup Database Connection
 ##---------------------------------
-sed -i 's#<connection url="jdbc:postgresql://127.0.0.1:5432/cot" username="martiuser" password="" />#<connection url="jdbc:postgresql://'"${DBHOST}"'/cot" username="martiuser" password="'"${DBPASSWORD}"'" />#' CoreConfig.xml
+## Setup Database Connection, if provided, otherwise we'll use what was setup
+##---------------------------------
+if [ ! -z "${DBHOST}"] || [ ! -z "${DBPASSWORD}" ];
+then
+  sed -i 's#<connection url="jdbc:postgresql://127.0.0.1:5432/cot" username="martiuser" password="" />#<connection url="jdbc:postgresql://'"${DBHOST}"'/cot" username="martiuser" password="'"${DBPASSWORD}"'" />#' CoreConfig.xml
+fi
 
 sed -i '/\/Configuration/i<certificateSigning CA=\"TAKServer\"> \
         <certificateConfig> \
